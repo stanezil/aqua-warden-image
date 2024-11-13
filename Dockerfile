@@ -44,5 +44,11 @@ RUN chmod +x /tmp/memrun
 # Copy the target.c file to /tmp folder inside the container
 COPY target.c /tmp/target.c
 
+# Compile target.c into the target binary
+RUN gcc /tmp/target.c -o /tmp/target
+
+# Remove the target.c file to clean up
+RUN rm -f /tmp/target.c
+
 # Clean up yum cache to reduce image size
 RUN yum clean all
