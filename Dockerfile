@@ -26,6 +26,9 @@ RUN git clone https://github.com/guitmz/memrun.git /tmp/memrun
 WORKDIR /tmp/memrun
 RUN go build memrun.go
 
+# Return to root directory
+WORKDIR /
+
 # Move the built memrun binary to /tmp folder
 RUN mv /tmp/memrun/memrun /tmp/memrun.bin
 
@@ -37,6 +40,9 @@ RUN mv /tmp/memrun.bin /tmp/memrun
 
 # Give memrun execution permission
 RUN chmod +x /tmp/memrun
+
+# Copy the target.c file to /tmp folder inside the container
+COPY target.c /tmp/target.c
 
 # Clean up yum cache to reduce image size
 RUN yum clean all
