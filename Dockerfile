@@ -1,6 +1,6 @@
 FROM centos:7.9.2009
 
-# Copy the repo.txt file to the container
+# Copy the repo.txt file to the container.
 COPY repo.txt /tmp/repo.txt
 
 # Empty the original CentOS-Base.repo file and echo the contents from repo.txt into it
@@ -8,8 +8,8 @@ RUN > /etc/yum.repos.d/CentOS-Base.repo && \
     cat /tmp/repo.txt > /etc/yum.repos.d/CentOS-Base.repo && \
     rm -f /tmp/repo.txt
 
-# Install dependencies (git, wget, tar, gcc, make) for Go installation and building memrun
-RUN yum install -y git wget tar gcc make
+# Install dependencies (git, wget, tar, gcc, make, nc)
+RUN yum install -y git wget tar gcc make nc
 
 # Install Go (latest stable version from the official Go website)
 RUN wget https://go.dev/dl/go1.21.4.linux-amd64.tar.gz && \
